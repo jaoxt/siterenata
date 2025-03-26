@@ -6,30 +6,39 @@
     <title>Estante de Livros</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-            background-color: #f0f0f5;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #84fab0, #8fd3f4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: #ffffff;
+            max-width: 600px;
+            width: 90%;
+            background: white;
             padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
         h2 {
-            text-align: center;
             color: #333;
+            font-size: 24px;
         }
         input {
             width: 100%;
             padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #aaa;
-            border-radius: 4px;
+            margin: 15px 0;
+            border: 2px solid #8fd3f4;
+            border-radius: 8px;
             font-size: 16px;
+            outline: none;
+        }
+        input:focus {
+            border-color: #84fab0;
         }
         .book-list {
             list-style: none;
@@ -39,11 +48,15 @@
             padding: 12px;
             border-bottom: 1px solid #ddd;
             font-size: 16px;
-            background: #fafafa;
-            transition: background 0.3s;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            border-radius: 6px;
+            margin: 5px 0;
         }
         .book-list li:hover {
-            background: #e0e0e0;
+            background: #8fd3f4;
+            color: white;
+            cursor: pointer;
         }
     </style>
 </head>
