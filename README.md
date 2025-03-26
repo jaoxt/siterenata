@@ -56,10 +56,11 @@
         }
         .book-list li:hover {
             background: #8fd3f4;
-            color: black;
+            color: white;
         }
         .book-details {
             display: none;
+            color: black;
             background: #f1f1f1;
             padding: 10px;
             border-radius: 6px;
