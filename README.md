@@ -9,37 +9,48 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 20px;
-            background-color: #f4f4f4;
+            background-color: #f0f0f5;
         }
         .container {
             max-width: 800px;
             margin: auto;
-            background: white;
+            background: #ffffff;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
         }
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #aaa;
             border-radius: 4px;
+            font-size: 16px;
         }
         .book-list {
             list-style: none;
             padding: 0;
         }
         .book-list li {
-            padding: 10px;
+            padding: 12px;
             border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            background: #fafafa;
+            transition: background 0.3s;
+        }
+        .book-list li:hover {
+            background: #e0e0e0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Estante de Livros</h2>
-        <input type="text" id="search" placeholder="Pesquisar livros...">
+        <h2>📚 Estante de Livros 📖</h2>
+        <input type="text" id="search" placeholder="🔍 Pesquisar livros...">
         <ul id="books" class="book-list"></ul>
     </div>
 
