@@ -1,1 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estante de Livros</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #84fab0, #8fd3f4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            font-size: 24px;
+        }
+        input {
+            width: calc(100% - 24px);
+            padding: 12px;
+            margin: 15px 0;
+            border: 2px solid #8fd3f4;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            display: block;
+            text-align: center;
+        }
+        input:focus {
+            border-color: #84fab0;
+        }
+        .book-list {
+            list-style: none;
+            padding: 0;
+        }
+        .book-list li {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            font-size: 16px;
+            background: #f9f9f9;
+            transition: all 0.3s;
+            border-radius: 6px;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        .book-list li:hover {
+            background: #8fd3f4;
+            color: white;
+        }
+        .book-details {
+            display: none;
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>📚 Estante de Livros 📖</h2>
+        <input type="text" id="search" placeholder="🔍 Pesquisar livros...">
+        <ul id="books" class="book-list"></ul>
+    </div>
 
+    <script>
+        const books = [
+            { title: "Dom Casmurro", author: "Machado de Assis", details: "Um dos maiores romances da literatura brasileira, narrado pelo enigmático Bentinho." },
+            { title: "O Guarani", author: "José de Alencar", details: "Um romance indianista que retrata o amor entre Peri e Cecília em meio a conflitos coloniais." },
+            { title: "Iracema", author: "José de Alencar", details: "Um clássico da literatura romântica, narrando a trágica história de Iracema e Martim." },
+            { title: "Memórias Póstumas de Brás Cubas", author: "Machado de Assis", details: "Narrado por um defunto, é uma sátira da sociedade brasileira do século XIX." },
+            { title: "O Cortiço", author: "Aluísio de Azevedo", details: "Um romance naturalista que expõe a vida miserável nos cortiços do Rio de Janeiro." },
+            { title: "A Moreninha", author: "Joaquim Manuel de Macedo", details: "Um dos primeiros romances brasileiros, abordando amor e promessas da juventude." },
+            { title: "Triste Fim de Policarpo Quaresma", author: "Lima Barreto", details: "Uma crítica ao nacionalismo exagerado e às dificuldades do Brasil pós-abolição." },
+            { title: "Vidas Secas", author: "Graciliano Ramos", details: "A luta de uma família sertaneja contra a seca e a miséria." },
+            { title: "Capitães da Areia", author: "Jorge Amado", details: "Relata a vida de meninos de rua em Salvador e sua luta pela sobrevivência." },
+            { title: "O Tempo e o Vento", author: "Érico Veríssimo", details: "Uma saga que narra a formação do Rio Grande do Sul e suas famílias." },
+            { title: "São Bernardo", author: "Graciliano Ramos", details: "A história de Paulo Honório, um homem marcado pela ambição e pelo autoritarismo." },
+            { title: "Fogo Morto", author: "José Lins do Rego", details: "Um romance regionalista que narra o declínio da aristocracia açucareira no Nordeste." },
+            { title: "A Escrava Isaura", author: "Bernardo Guimarães", details: "Um romance abolicionista que narra a luta de Isaura contra a escravidão." },
+            { title: "Marília de Dirceu", author: "Tomás Antônio Gonzaga", details: "Uma coletânea de poesias arcadistas sobre o amor e a saudade." },
+            { title: "Auto da Compadecida", author: "Ariano Suassuna", details: "Uma peça teatral que mistura humor, cultura nordestina e crítica social." },
+            { title: "Os Sertões", author: "Euclides da Cunha", details: "Uma análise da Guerra de Canudos, unindo sociologia, história e literatura." },
+            { title: "Sagarana", author: "Guimarães Rosa", details: "Um conjunto de contos que retrata o sertão mineiro e sua gente." },
+            { title: "Grande Sertão: Veredas", author: "Guimarães Rosa", details: "Uma obra-prima da literatura brasileira, narrando a vida no sertão em linguagem inovadora." },
+            { title: "O Seminarista", author: "Bernardo Guimarães", details: "A história de um jovem seminarista dividido entre a fé e o amor." },
+            { title: "Noite na Taverna", author: "Álvares de Azevedo", details: "Uma coletânea de contos macabros e sombrios do ultrarromantismo." },
+        ];
+
+        function displayBooks(filter = "") {
+            const bookList = document.getElementById("books");
+            bookList.innerHTML = "";
+            books.filter(book => 
+                book.title.toLowerCase().includes(filter.toLowerCase()) ||
+                book.author.toLowerCase().includes(filter.toLowerCase())
+            ).forEach((book, index) => {
+                const li = document.createElement("li");
+                li.textContent = `${book.title} – ${book.author}`;
+                li.addEventListener("click", () => toggleDetails(index));
+                const detailsDiv = document.createElement("div");
+                detailsDiv.classList.add("book-details");
+                detailsDiv.innerHTML = `<strong>Detalhes:</strong><p>${book.details}</p>`;
+                li.appendChild(detailsDiv);
+                bookList.appendChild(li);
+            });
+        }
+
+        function toggleDetails(index) {
+            const bookList = document.getElementById("books");
+            const bookItems = bookList.getElementsByTagName("li");
+            const detailsDiv = bookItems[index].querySelector(".book-details");
+            detailsDiv.style.display = detailsDiv.style.display === "block" ? "none" : "block";
+        }
+
+        document.getElementById("search").addEventListener("input", function() {
+            displayBooks(this.value);
+        });
+
+        displayBooks();
+    </script>
+</body>
+</html>
